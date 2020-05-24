@@ -11,9 +11,20 @@ public class PersonelDAO implements DAO<Personel>{
 	ArrayList<Personel> p;
 
 	public List getAllStudents() {
-		  p = new ArrayList<Personel>();
-	      Personel p1 = new Personel("li","arnold","etudiant",LocalDate.of(2015, 12, 31));
-	      p.add(p1);
+		  open();
+		try {
+			PreparedStatement prepare = connect.prepareStatement(
+					"INSERT INTO Personnel(nom, prenom, fonction, date) VALUES(?, ?, ?, ?)");
+			prepare.setString(1, obj.getNom);
+			prepare.setString(2, obj.getPrenom);	
+			prepare.setString(3, obj.getFonction);
+			prepare.setString(4,obj.getDate);
+		}
+		catch (SQLException throwables) {
+		      throwables.printStackTrace();
+		    }
+		close();
+		return null;
 	}
 
 	public Personel getPersonel(int pe) {
@@ -26,7 +37,17 @@ public class PersonelDAO implements DAO<Personel>{
 	}
 
 	public void deletePersonel(Personel p) {
-		p.remove
+		open();
+	    try {
+	      PreparedStatement deletePersonel =
+	          this.connect.prepareStatement("DELETE FROM Personnel WHERE nom = ?");
+	      deletePersonel.setString(1, nom);
+	      deletePersonel.execute();
+	    } catch (SQLException throwables) {
+	      throwables.printStackTrace();
+	    }
+
+	   close();
 	}
 
 

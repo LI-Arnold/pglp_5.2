@@ -34,7 +34,22 @@ public class Personel implements Serialisable{
 	}
 
 	public void print() {
-		System.out.println("Personel");
-		
+		System.out.println("Personel");	
+	}
+	
+	public String getNom(){
+		return this.nom;
+	}
+	
+	public String getPrenom(){
+		return this.prenom;
+	}
+	
+	public String getFonction(){
+		return this.date;
+	}
+	
+	public LocalDate getDate(){
+		return this.date;
 	}
 }
